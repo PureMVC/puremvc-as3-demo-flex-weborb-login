@@ -8,7 +8,7 @@
 	xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:view="org.puremvc.as3.demos.flex.weborb.login.view.components.*" 
 	xmlns:reflector="com.rictus.reflector.*" 
-	pageTitle="PureMVC Login Example using WebORB for PHP"
+	pageTitle="PureMVC Flex/WebORB Demo – Login"
 	backgroundColor="#000000"
 	creationComplete="onCreationComplete(event)"  
 	viewSourceURL="srcview/index.html">
