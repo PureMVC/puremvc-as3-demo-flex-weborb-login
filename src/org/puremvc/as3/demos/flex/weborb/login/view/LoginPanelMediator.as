@@ -85,8 +85,7 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 			var loginVO: LoginVO = new LoginVO();
 			loginVO.username = loginPanel.username.text;
 			loginVO.password = loginPanel.password.text;
-			
-			// loginProxy.getUser(loginVO);
+
 			sendNotification(ApplicationFacade.LOGIN, loginVO);
 		}
 
