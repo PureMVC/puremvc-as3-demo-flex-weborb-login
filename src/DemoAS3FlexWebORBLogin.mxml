@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ PureMVC Flex/WebORB Demo – Login
+ Copyright (c) 2007 Jens Krause <jens.krause@puremvc.org> <www.websector.de>
+ Your reuse is governed by the Creative Commons Attribution 3.0 License
+-->
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:view="org.puremvc.as3.demos.flex.weborb.login.view.components.*" 
+	xmlns:reflector="com.rictus.reflector.*" 
+	pageTitle="PureMVC Login Example using WebORB for PHP"
+	backgroundColor="#000000"
+	creationComplete="onCreationComplete(event)"  
+	viewSourceURL="srcview/index.html">
+
+	<mx:Style>
+		global
+		{
+			font-family: Verdana;
+			font-weight: normal;	
+		}	
+		Application
+		{	
+			horizontalAlign: center;
+			verticalAlign: top;
+			theme-color: #401229;
+		}
+	</mx:Style>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import org.puremvc.as3.demos.flex.weborb.login.ApplicationFacade;
+			import mx.events.FlexEvent;
+			import org.puremvc.patterns.observer.Notification;
+	
+			private var facade: ApplicationFacade = ApplicationFacade.getInstance();			
+
+			public function onCreationComplete(event: FlexEvent):void
+			{
+				facade.notifyObservers (new Notification(ApplicationFacade.APP_STARTUP, this));
+			}
+        
+		]]>
+	</mx:Script>
+
+  <mx:ViewStack id="appView">
+        <view:LoginPanel id="login" />		
+		<view:LoggedInBox id="loggedIn" />
+    </mx:ViewStack>
+    
+	<reflector:Reflector target="{appView}" alpha=".7" falloff=".8"/>
+
+	<mx:Move id="faultEffect"
+		target="{appView}"
+		repeatCount="4" duration="50" 
+		xFrom="{appView.x - 30}" xTo="{appView.x}" /> 
+	
+</mx:Application>
