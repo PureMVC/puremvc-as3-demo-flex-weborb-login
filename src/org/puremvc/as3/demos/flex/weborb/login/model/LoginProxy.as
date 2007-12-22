@@ -39,7 +39,7 @@ package org.puremvc.as3.demos.flex.weborb.login.model
 			
 			loginService = new RemoteObject();
 			loginService.destination = "GenericDestination";
-			loginService.source = "org.puremvc.as3.demos.flex.weborb.login.Login";
+			loginService.source = "org.puremvc.as3.demos.flex.weborb.login.LoginFacade";
 			
 			loginService.getUser.addEventListener(ResultEvent.RESULT, getUserResult); 
 			loginService.addEventListener(FaultEvent.FAULT, getUserFailed);

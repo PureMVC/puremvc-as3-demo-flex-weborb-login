@@ -10,6 +10,7 @@ Copyright(c) 2007 Jens Krause, Some rights reserved.
 --------------------------------------------------------------------------
 
 
-Copy all files located in folder named "php" into {yourWebORBInstallationFolder}/Weborb/Services/ 
-
-
+1. Make your sure you have installed the latest version of WebORB for PHP. For any help check out the instructions on "
+Getting Started with Flex and WebORB for PHP" http://www.themidnightcoders.com/weborb/php/gettingstarted.htm 
+2. Copy all files located in folder named "Services" into {yourWebORBInstallationFolder}/Weborb/Services/ 
+The class named LoginFacade.php is acting as a Facade using the future version of PureMVC for PHP.
