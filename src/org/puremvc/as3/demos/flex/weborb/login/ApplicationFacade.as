@@ -43,7 +43,7 @@ package org.puremvc.as3.demos.flex.weborb.login
 			registerCommand( LOGIN, LoginCommand );
 		}		
 
-		public function startup(app:Login):void
+		public function startup(app:Demo_AS3_Flex_WebORB_Login):void
 		{
 			facade.notifyObservers (new Notification(ApplicationFacade.APP_STARTUP, this));
 		}
