@@ -10,7 +10,7 @@
 	xmlns:reflector="com.rictus.reflector.*" 
 	pageTitle="PureMVC Flex/WebORB Demo – Login"
 	backgroundColor="#000000"
-	creationComplete="onCreationComplete(event)"  
+	creationComplete="facade.startup(this)"  
 	viewSourceURL="srcview/index.html">
 
 	<mx:Style>
@@ -29,17 +29,8 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import mx.controls.Alert;
 			import org.puremvc.as3.demos.flex.weborb.login.ApplicationFacade;
-			import mx.events.FlexEvent;
-			import org.puremvc.patterns.observer.Notification;
-	
 			private var facade: ApplicationFacade = ApplicationFacade.getInstance();			
-
-			public function onCreationComplete(event: FlexEvent):void
-			{
-				facade.notifyObservers (new Notification(ApplicationFacade.APP_STARTUP, this));
-			}
         
 		]]>
 	</mx:Script>
