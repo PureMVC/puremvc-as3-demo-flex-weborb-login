@@ -9,6 +9,7 @@ package org.puremvc.as3.demos.flex.weborb.login
 	import org.puremvc.as3.demos.flex.weborb.login.controller.LoginCommand;
 	import org.puremvc.interfaces.*;
 	import org.puremvc.patterns.facade.*;
+	import org.puremvc.patterns.observer.Notification;
 	import org.puremvc.patterns.proxy.*;
 
 	public class ApplicationFacade extends Facade
@@ -43,9 +44,9 @@ package org.puremvc.as3.demos.flex.weborb.login
 			registerCommand( LOGIN, LoginCommand );
 		}		
 
-		public function startup(app:Demo_AS3_Flex_WebORB_Login):void
+		public function startup(app:DemoAS3FlexWebORBLogin):void
 		{
-			facade.notifyObservers (new Notification(ApplicationFacade.APP_STARTUP, this));
+			this.notifyObservers (new Notification(ApplicationFacade.APP_STARTUP, app));
 		}
  	}
 }
