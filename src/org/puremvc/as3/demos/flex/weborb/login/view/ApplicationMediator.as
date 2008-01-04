@@ -131,11 +131,11 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		/**
 		 * Cast the viewComponent to its actual type.
 		 * 
-		 * @return app the viewComponent cast to DemoAS3FlexWebORBLogin
+		 * @return app the viewComponent cast to Login
 		 */
-		protected function get app(): DemoAS3FlexWebORBLogin
+		protected function get app(): Login
 		{
-			return viewComponent as DemoAS3FlexWebORBLogin;
+			return viewComponent as Login;
 		}
 	}
 }
