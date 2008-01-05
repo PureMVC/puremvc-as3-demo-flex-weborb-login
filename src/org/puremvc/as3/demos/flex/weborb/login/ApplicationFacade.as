@@ -6,6 +6,7 @@
 package org.puremvc.as3.demos.flex.weborb.login
 {
 	import org.puremvc.as3.demos.flex.weborb.login.controller.ApplicationStartupCommand;
+	import org.puremvc.as3.demos.flex.weborb.login.controller.ChangeWorkflowStateCommand;
 	import org.puremvc.as3.demos.flex.weborb.login.controller.LoginCommand;
 	import org.puremvc.interfaces.*;
 	import org.puremvc.patterns.facade.*;
@@ -24,7 +25,8 @@ package org.puremvc.as3.demos.flex.weborb.login
 		public static const LOGIN_FAILED: String = "loginFailed";
 		public static const LOGIN_SUCCES: String = "loginSucces";		
 		
-				
+		public static const CHANGE_WORKFLOW_STATE: String = "changeWorkflowState";
+						
 		/**
 		 * Singleton ApplicationFacade Factory Method
 		 */
@@ -42,6 +44,7 @@ package org.puremvc.as3.demos.flex.weborb.login
 			super.initializeController();			
 			registerCommand( APP_STARTUP, ApplicationStartupCommand);
 			registerCommand( LOGIN, LoginCommand );
+			registerCommand( CHANGE_WORKFLOW_STATE, ChangeWorkflowStateCommand );
 		}		
 
 		public function startup(app:Login):void

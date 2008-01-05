@@ -58,10 +58,11 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		override public function listNotificationInterests():Array 
 		{
 			
-			return [ 	ApplicationFacade.APP_STARTUP,
-						ApplicationFacade.APP_STATE,
+			return [ 	
 						ApplicationFacade.LOGIN_FAILED,
-						ApplicationFacade.LOGIN_SUCCES ];
+						ApplicationFacade.LOGIN_SUCCES, 
+						ApplicationFacade.APP_STATE
+					];
 		}
 
 		/**
@@ -73,14 +74,11 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		{
 			switch (note.getName()) 
 			{
-				case ApplicationFacade.APP_STARTUP:
-					appProxy.workflowState = ApplicationProxy.VIEWING_LOGIN_SCREEN;
-				break;
 				case ApplicationFacade.LOGIN_FAILED:
-					appProxy.workflowState = ApplicationProxy.VIEWING_ERROR_SCREEN;
+					sendNotification( ApplicationFacade.CHANGE_WORKFLOW_STATE,  ApplicationProxy.VIEWING_ERROR_SCREEN);
 				break;
 				case ApplicationFacade.LOGIN_SUCCES:
-					appProxy.workflowState = ApplicationProxy.VIEWING_LOGGED_IN_SCREEN;
+					sendNotification( ApplicationFacade.CHANGE_WORKFLOW_STATE,  ApplicationProxy.VIEWING_LOGGED_IN_SCREEN);
 				break;
 				case ApplicationFacade.APP_STATE:
 					changeViewState();
@@ -125,7 +123,8 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 	   		app.faultEffect.end();
 	   		app.faultEffect.play();
 	   		
-	   		appProxy.workflowState = ApplicationProxy.VIEWING_LOGIN_SCREEN;
+	   		sendNotification( ApplicationFacade.CHANGE_WORKFLOW_STATE,  ApplicationProxy.VIEWING_LOGIN_SCREEN);
+
 	   }
 		
 		/**

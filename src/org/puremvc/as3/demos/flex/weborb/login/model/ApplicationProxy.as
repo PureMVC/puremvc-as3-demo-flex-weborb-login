@@ -41,13 +41,12 @@ package org.puremvc.as3.demos.flex.weborb.login.model
 			_workflowState = value;
 			sendNotification( ApplicationFacade.APP_STATE );
 		}
-
 		/**
 		 * Gets the state of the applications "workflow"
 		 */				
 		public function get workflowState(): uint
-		{
+		{	
 			return _workflowState;
-		}				
+		}						
 	}
 }
