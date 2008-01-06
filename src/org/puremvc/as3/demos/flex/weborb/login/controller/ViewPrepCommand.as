@@ -5,6 +5,7 @@
  */
 package org.puremvc.as3.demos.flex.weborb.login.controller
 {	
+	import org.puremvc.as3.demos.flex.weborb.login.model.ApplicationProxy;
 	import org.puremvc.as3.demos.flex.weborb.login.view.ApplicationMediator;
 	import org.puremvc.interfaces.*;
 	import org.puremvc.patterns.command.*;
@@ -21,6 +22,9 @@ package org.puremvc.as3.demos.flex.weborb.login.controller
 		override public function execute(note: INotification) :void	
 		{
 			facade.registerMediator( new ApplicationMediator(note.getBody()));
+			
+			var appProxy: ApplicationProxy = facade.retrieveProxy(ApplicationProxy.NAME) as ApplicationProxy;
+			appProxy.workflowState = ApplicationProxy.VIEWING_LOGIN_SCREEN;			
 		}		
 	}
 }
