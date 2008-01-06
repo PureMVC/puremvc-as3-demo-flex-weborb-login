@@ -5,6 +5,7 @@
  */
 package org.puremvc.as3.demos.flex.weborb.login.controller
 {	
+	import org.puremvc.as3.demos.flex.weborb.login.ApplicationFacade;
 	import org.puremvc.as3.demos.flex.weborb.login.model.ApplicationProxy;
 	import org.puremvc.as3.demos.flex.weborb.login.view.ApplicationMediator;
 	import org.puremvc.interfaces.*;
@@ -23,8 +24,7 @@ package org.puremvc.as3.demos.flex.weborb.login.controller
 		{
 			facade.registerMediator( new ApplicationMediator(note.getBody()));
 			
-			var appProxy: ApplicationProxy = facade.retrieveProxy(ApplicationProxy.NAME) as ApplicationProxy;
-			appProxy.workflowState = ApplicationProxy.VIEWING_LOGIN_SCREEN;			
+			sendNotification( ApplicationFacade.CHANGE_WORKFLOW_STATE,  ApplicationProxy.VIEWING_LOGIN_SCREEN);		
 		}		
 	}
 }
