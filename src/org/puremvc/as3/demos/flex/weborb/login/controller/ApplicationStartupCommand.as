@@ -5,8 +5,8 @@
  */
 package org.puremvc.as3.demos.flex.weborb.login.controller
 {
-	import org.puremvc.interfaces.*;
-	import org.puremvc.patterns.command.*;
+
+	import org.puremvc.as3.patterns.command.MacroCommand;
 
 	public class ApplicationStartupCommand extends MacroCommand
 	{		

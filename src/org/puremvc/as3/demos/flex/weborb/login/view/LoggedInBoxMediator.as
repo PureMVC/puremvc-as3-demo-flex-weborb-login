@@ -8,8 +8,9 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 	import org.puremvc.as3.demos.flex.weborb.login.ApplicationFacade;
 	import org.puremvc.as3.demos.flex.weborb.login.model.LoginProxy;
 	import org.puremvc.as3.demos.flex.weborb.login.view.components.LoggedInBox;
-	import org.puremvc.interfaces.*;
-	import org.puremvc.patterns.mediator.Mediator;
+	import org.puremvc.as3.interfaces.IMediator;
+	import org.puremvc.as3.interfaces.INotification;
+	import org.puremvc.as3.patterns.mediator.Mediator;
 
 	/**
 	 * A Mediator for interacting with the LoggedInBox component.
@@ -27,20 +28,10 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		 */					
 		public function LoggedInBoxMediator(viewComponent:Object) 
 		{
-			super(viewComponent);
+			super(NAME, viewComponent);
 						
 			loginProxy = LoginProxy(facade.retrieveProxy(LoginProxy.NAME));
 			
-		}
-
-		/**
-		 * Get the Mediator name
-		 * 
-		 * @return String the Mediator name
-		 */
-		override public function getMediatorName():String
-		{
-			return LoggedInBoxMediator.NAME;
 		}
 
 		/**

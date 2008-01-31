@@ -8,10 +8,8 @@ package org.puremvc.as3.demos.flex.weborb.login
 	import org.puremvc.as3.demos.flex.weborb.login.controller.ApplicationStartupCommand;
 	import org.puremvc.as3.demos.flex.weborb.login.controller.ChangeWorkflowStateCommand;
 	import org.puremvc.as3.demos.flex.weborb.login.controller.LoginCommand;
-	import org.puremvc.interfaces.*;
-	import org.puremvc.patterns.facade.*;
-	import org.puremvc.patterns.observer.Notification;
-	import org.puremvc.patterns.proxy.*;
+	import org.puremvc.as3.patterns.facade.Facade;
+	import org.puremvc.as3.patterns.observer.Notification;
 
 	public class ApplicationFacade extends Facade
 	{

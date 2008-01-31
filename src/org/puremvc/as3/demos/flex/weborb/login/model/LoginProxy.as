@@ -12,8 +12,8 @@ package org.puremvc.as3.demos.flex.weborb.login.model
 	
 	import org.puremvc.as3.demos.flex.weborb.login.ApplicationFacade;
 	import org.puremvc.as3.demos.flex.weborb.login.model.vo.LoginVO;
-	import org.puremvc.interfaces.*;
-	import org.puremvc.patterns.proxy.Proxy;
+	import org.puremvc.as3.interfaces.IProxy;
+	import org.puremvc.as3.patterns.proxy.Proxy;
 	
 	/**
 	 * A Proxy for storing users data and sending and retrieving data to/from its remoting service

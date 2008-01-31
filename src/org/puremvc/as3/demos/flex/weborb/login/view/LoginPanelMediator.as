@@ -11,8 +11,9 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 	import org.puremvc.as3.demos.flex.weborb.login.model.LoginProxy;
 	import org.puremvc.as3.demos.flex.weborb.login.model.vo.LoginVO;
 	import org.puremvc.as3.demos.flex.weborb.login.view.components.LoginPanel;
-	import org.puremvc.interfaces.*;
-	import org.puremvc.patterns.mediator.Mediator;
+	import org.puremvc.as3.interfaces.IMediator;
+	import org.puremvc.as3.interfaces.INotification;
+	import org.puremvc.as3.patterns.mediator.Mediator;
 
 	
 	/**
@@ -31,22 +32,12 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		 */				
 		public function LoginPanelMediator(viewComponent:Object) 
 		{
-			super(viewComponent);
+			super(NAME, viewComponent);
 			
 			loginProxy = LoginProxy(facade.retrieveProxy(LoginProxy.NAME));
 
 			loginPanel.addEventListener( LoginPanel.LOGIN, login);
 			
-		}
-
-		/**
-		 * Get the Mediator name
-		 * 
-		 * @return String the Mediator name
-		 */
-		override public function getMediatorName():String
-		{
-			return LoginPanelMediator.NAME;
 		}
 
 		/**

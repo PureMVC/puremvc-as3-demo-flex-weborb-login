@@ -8,9 +8,8 @@ package org.puremvc.as3.demos.flex.weborb.login.controller
 	import org.puremvc.as3.demos.flex.weborb.login.ApplicationFacade;
 	import org.puremvc.as3.demos.flex.weborb.login.model.ApplicationProxy;
 	import org.puremvc.as3.demos.flex.weborb.login.view.ApplicationMediator;
-	import org.puremvc.interfaces.*;
-	import org.puremvc.patterns.command.*;
-	import org.puremvc.patterns.observer.*;
+	import org.puremvc.as3.interfaces.INotification;
+	import org.puremvc.as3.patterns.command.SimpleCommand;
 
 	public class ViewPrepCommand extends SimpleCommand
 	{

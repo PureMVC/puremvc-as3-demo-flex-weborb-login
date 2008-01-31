@@ -6,8 +6,8 @@
 package org.puremvc.as3.demos.flex.weborb.login.model
 {
 	import org.puremvc.as3.demos.flex.weborb.login.ApplicationFacade;
-	import org.puremvc.interfaces.*;
-	import org.puremvc.patterns.proxy.Proxy;
+	import org.puremvc.as3.interfaces.IProxy;
+	import org.puremvc.as3.patterns.proxy.Proxy;
 	
 
 	public class ApplicationProxy extends Proxy implements IProxy

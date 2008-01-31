@@ -11,8 +11,9 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 	import org.puremvc.as3.demos.flex.weborb.login.ApplicationFacade;
 	import org.puremvc.as3.demos.flex.weborb.login.model.ApplicationProxy;
 	import org.puremvc.as3.demos.flex.weborb.login.model.LoginProxy;
-	import org.puremvc.interfaces.*;
-	import org.puremvc.patterns.mediator.Mediator;
+	import org.puremvc.as3.interfaces.IMediator;
+	import org.puremvc.as3.interfaces.INotification;
+	import org.puremvc.as3.patterns.mediator.Mediator;
 	
 	/**
 	 * A Mediator for interacting with the top level Application.
@@ -31,7 +32,7 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		 */
 		public function ApplicationMediator( viewComponent:Object ) 
 		{
-			super(viewComponent);
+			super(NAME, viewComponent);
 				
 			facade.registerMediator(new LoginPanelMediator(app.login));
 			facade.registerMediator(new LoggedInBoxMediator(app.loggedIn));
