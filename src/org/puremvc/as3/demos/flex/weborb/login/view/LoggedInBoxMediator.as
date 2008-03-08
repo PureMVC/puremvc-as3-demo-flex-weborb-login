@@ -41,7 +41,7 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		 */
 		override public function listNotificationInterests():Array 
 		{
-			return [ ApplicationFacade.LOGIN_SUCCES ];
+			return [ ApplicationFacade.LOGIN_SUCCESS ];
 		}
 
 		/**
@@ -53,7 +53,7 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		{
 			switch (note.getName()) 
 			{
-				case ApplicationFacade.LOGIN_SUCCES:
+				case ApplicationFacade.LOGIN_SUCCESS:
 					loggedInBox.loginVO = loginProxy.loggedInVO;
 				break;
 				default:

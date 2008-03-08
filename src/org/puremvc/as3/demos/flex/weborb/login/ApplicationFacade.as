@@ -21,7 +21,7 @@ package org.puremvc.as3.demos.flex.weborb.login
 
 		public static const LOGIN: String = "login";
 		public static const LOGIN_FAILED: String = "loginFailed";
-		public static const LOGIN_SUCCES: String = "loginSucces";		
+		public static const LOGIN_SUCCESS: String = "loginSucces";		
 		
 		public static const CHANGE_WORKFLOW_STATE: String = "changeWorkflowState";
 						

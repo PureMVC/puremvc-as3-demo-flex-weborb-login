@@ -42,16 +42,6 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		}
 
 		/**
-		 * Get the Mediator name.
-		 * 
-		 * @return String the Mediator name
-		 */
-		override public function getMediatorName():String
-		{
-			return ApplicationMediator.NAME;
-		}
-
-		/**
 		 * List all notifications this Mediator is interested in.
 		 * 
 		 * @return Array the list of Nofitication names
@@ -61,7 +51,7 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 			
 			return [ 	
 						ApplicationFacade.LOGIN_FAILED,
-						ApplicationFacade.LOGIN_SUCCES, 
+						ApplicationFacade.LOGIN_SUCCESS, 
 						ApplicationFacade.APP_STATE
 					];
 		}
@@ -78,7 +68,7 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 				case ApplicationFacade.LOGIN_FAILED:
 					sendNotification( ApplicationFacade.CHANGE_WORKFLOW_STATE,  ApplicationProxy.VIEWING_ERROR_SCREEN);
 				break;
-				case ApplicationFacade.LOGIN_SUCCES:
+				case ApplicationFacade.LOGIN_SUCCESS:
 					sendNotification( ApplicationFacade.CHANGE_WORKFLOW_STATE,  ApplicationProxy.VIEWING_LOGGED_IN_SCREEN);
 				break;
 				case ApplicationFacade.APP_STATE:

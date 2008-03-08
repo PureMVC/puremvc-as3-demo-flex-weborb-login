@@ -69,7 +69,7 @@ package org.puremvc.as3.demos.flex.weborb.login.model
 			loggedInVO = event.result as LoginVO;
 			loggedInVO.loginDate = new Date();
 			
-			sendNotification(ApplicationFacade.LOGIN_SUCCES);
+			sendNotification(ApplicationFacade.LOGIN_SUCCESS);
 		}
 
 		/**
