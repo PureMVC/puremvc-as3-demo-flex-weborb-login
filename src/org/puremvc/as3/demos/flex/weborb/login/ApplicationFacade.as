@@ -47,7 +47,7 @@ package org.puremvc.as3.demos.flex.weborb.login
 
 		public function startup(app:Login):void
 		{
-			this.notifyObservers (new Notification(ApplicationFacade.APP_STARTUP, app));
+			this.sendNotification( ApplicationFacade.APP_STARTUP, app );
 		}
  	}
 }
