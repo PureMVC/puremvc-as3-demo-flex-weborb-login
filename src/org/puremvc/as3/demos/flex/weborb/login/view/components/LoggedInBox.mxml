@@ -11,8 +11,7 @@
     <![CDATA[
     	import org.puremvc.as3.demos.flex.weborb.login.model.vo.LoginVO;
 		
-		[Bindable]
-		public var loginVO: LoginVO;
+		[Bindable] public var loginVO: LoginVO;
 		           
     ]]>
     </mx:Script>

@@ -6,8 +6,7 @@
 package org.puremvc.as3.demos.flex.weborb.login.model.vo
 {
 
-	[RemoteClass(alias="org.puremvc.as3.demos.flex.weborb.login.vo.LoginVO")]
-	
+	[RemoteClass(alias="org.puremvc.as3.demos.flex.weborb.login.vo.LoginVO")]	
 	
    	[Bindable]
 	public class LoginVO

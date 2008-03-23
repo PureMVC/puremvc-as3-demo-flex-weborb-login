@@ -10,24 +10,32 @@ package org.puremvc.as3.demos.flex.weborb.login.model
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.RemoteObject;
 	
-	import org.puremvc.as3.demos.flex.weborb.login.ApplicationFacade;
 	import org.puremvc.as3.demos.flex.weborb.login.model.vo.LoginVO;
 	import org.puremvc.as3.interfaces.IProxy;
 	import org.puremvc.as3.patterns.proxy.Proxy;
 	
 	/**
 	 * A Proxy for storing users data and sending and retrieving data to/from its remoting service
+	 * 
 	 */
 	public class LoginProxy extends Proxy implements IProxy
 	{
 		
 		public static const NAME:String = 'loginProxy';
-				
-		private var loginService: RemoteObject;
-		
+		//
+		// Notification name constants
+		public static const LOGIN_FAILED: String = "loginFailed";
+		public static const LOGIN_SUCCESS: String = "loginSucces";	
+		//
+		// login service				
+		private var _loginService: RemoteObject;
+		//
+		// error message
 		public var faultMessage: String;
-		public var loggedInVO: LoginVO;
-
+		//
+		// other part of the model
+		private var _appProxy: ApplicationProxy;
+		
 		/**
 		 * Constructor
 		 * 
@@ -35,14 +43,21 @@ package org.puremvc.as3.demos.flex.weborb.login.model
 		 */		
 		public function LoginProxy (data:Object=null) 
 		{
-			super(NAME,data);
+			super(NAME, new LoginVO() );
 			
-			loginService = new RemoteObject();
-			loginService.destination = "GenericDestination";
-			loginService.source = "org.puremvc.as3.demos.flex.weborb.login.LoginFacade";
+			//
+			// A local reference to another part of the model
+			// Note: Be carefull that the ApplicationProxy has already registered within
+			// the ModelPrepCommand before
+			_appProxy = facade.retrieveProxy( ApplicationProxy.NAME ) as ApplicationProxy;
+			//
+			// login service
+			_loginService = new RemoteObject();
+			_loginService.destination = "GenericDestination";
+			_loginService.source = "org.puremvc.as3.demos.flex.weborb.login.LoginFacade";
 			
-			loginService.getUser.addEventListener(ResultEvent.RESULT, getUserResult); 
-			loginService.addEventListener(FaultEvent.FAULT, getUserFailed);
+			_loginService.getUser.addEventListener(ResultEvent.RESULT, getUserResult); 
+			_loginService.addEventListener(FaultEvent.FAULT, getUserFailed);
 	
 		}
 		
@@ -51,9 +66,9 @@ package org.puremvc.as3.demos.flex.weborb.login.model
 		 * 
 		 * @param 	users data as LoginVO
 		 */			
-		public function getUser(vo:LoginVO):void
+		public function getUser( vo: LoginVO ):void
 		{
-			loginService.getUser(vo);		
+			_loginService.getUser( vo );		
 			CursorManager.setBusyCursor();
 		}
 
@@ -66,10 +81,17 @@ package org.puremvc.as3.demos.flex.weborb.login.model
 		{
 			CursorManager.removeBusyCursor();
 			
-			loggedInVO = event.result as LoginVO;
-			loggedInVO.loginDate = new Date();
-			
-			sendNotification(ApplicationFacade.LOGIN_SUCCESS);
+			//
+			// populate its data object using the result
+			var loginVO: LoginVO = event.result as LoginVO
+			loginVO.loginDate = new Date();
+			setData( loginVO );
+			//
+			// change the view state
+			_appProxy.viewState = ApplicationProxy.LOGGED_IN_STATE;
+			//
+			// notify all interested members
+			sendNotification( LoginProxy.LOGIN_SUCCESS );
 		}
 
 		/**
@@ -77,12 +99,26 @@ package org.puremvc.as3.demos.flex.weborb.login.model
 		 * 
 		 * @param 	fault event object
 		 */	
-		private function getUserFailed(event: FaultEvent):void 
+		private function getUserFailed(event: FaultEvent): void 
 		{
 			faultMessage = event.fault.faultString;
 			CursorManager.removeBusyCursor();
-			
-			sendNotification(ApplicationFacade.LOGIN_FAILED);
+			//
+			// change the view state	
+			_appProxy.viewState = ApplicationProxy.LOGIN_ERROR_STATE;	
+			//
+			// notify all interested members			
+			sendNotification( LoginProxy.LOGIN_FAILED );
+		}
+		
+		/**
+		 * Getter for its data object casted as LoginVO
+		 * 
+		 * @return 	LoginVO
+		 */			
+		public function get loginVO(): LoginVO
+		{
+			return data as LoginVO;
 		}				
 	}
 }

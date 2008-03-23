@@ -11,7 +11,7 @@
 	xmlns:reflector="com.rictus.reflector.*" 
 	pageTitle="PureMVC Flex/WebORB Demo – Login"
 	backgroundColor="#000000"
-	creationComplete="facade.startup(this)"  
+	creationComplete="facade.startup(this);"  
 	>
 
 	<mx:Style>
@@ -30,19 +30,34 @@
 	
 	<mx:Script>
 		<![CDATA[
+		
 			import org.puremvc.as3.demos.flex.weborb.login.ApplicationFacade;
+			//
+			// first initializing of the facade
 			private var facade: ApplicationFacade = ApplicationFacade.getInstance();			
         
 		]]>
 	</mx:Script>
 
-  <mx:ViewStack id="appView">
+	<!-- 
+		Viewstack to show loggin and loggedin screen		
+	-->
+    <mx:ViewStack id="appView">
         <view:LoginPanel id="login" />		
 		<view:LoggedInBox id="loggedIn" />
     </mx:ViewStack>
     
-	<reflector:Reflector target="{appView}" alpha=".7" falloff=".8"/>
-
+ 	<!-- 
+		Just a reflector.	
+	-->   
+	<reflector:Reflector id="reflector"
+		target="{appView}" 
+		alpha=".7" 
+		falloff=".8" />
+	
+	<!-- 
+		An effect to show an error trying to log in.
+	-->
 	<mx:Move id="faultEffect"
 		target="{appView}"
 		repeatCount="4" duration="50" 

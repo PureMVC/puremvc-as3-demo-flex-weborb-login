@@ -5,7 +5,6 @@
  */
 package org.puremvc.as3.demos.flex.weborb.login.view
 {	
-	import org.puremvc.as3.demos.flex.weborb.login.ApplicationFacade;
 	import org.puremvc.as3.demos.flex.weborb.login.model.LoginProxy;
 	import org.puremvc.as3.demos.flex.weborb.login.view.components.LoggedInBox;
 	import org.puremvc.as3.interfaces.IMediator;
@@ -18,7 +17,7 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 	public class LoggedInBoxMediator extends Mediator implements IMediator
 	{
 
-		private var loginProxy: LoginProxy;
+		private var _loginProxy: LoginProxy;
 
 		public static const NAME:String = 'LoggedInBoxMediator';
 
@@ -26,11 +25,12 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		 * Constructor. 
 		 * @param object the viewComponent
 		 */					
-		public function LoggedInBoxMediator(viewComponent:Object) 
+		public function LoggedInBoxMediator(viewComponent: LoggedInBox) 
 		{
 			super(NAME, viewComponent);
-						
-			loginProxy = LoginProxy(facade.retrieveProxy(LoginProxy.NAME));
+			//
+			// local reference to the login proxy		
+			_loginProxy = facade.retrieveProxy(LoginProxy.NAME) as LoginProxy;
 			
 		}
 
@@ -41,7 +41,7 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		 */
 		override public function listNotificationInterests():Array 
 		{
-			return [ ApplicationFacade.LOGIN_SUCCESS ];
+			return [ LoginProxy.LOGIN_SUCCESS ];
 		}
 
 		/**
@@ -49,20 +49,21 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		 * 
 		 * @param INotification a notification 
 		 */
-		override public function handleNotification( note:INotification ):void 
+		override public function handleNotification( note: INotification ):void 
 		{
-			switch (note.getName()) 
+			switch ( note.getName() ) 
 			{
-				case ApplicationFacade.LOGIN_SUCCESS:
-					loggedInBox.loginVO = loginProxy.loggedInVO;
+				case LoginProxy.LOGIN_SUCCESS:
+					loggedInBox.loginVO = _loginProxy.loginVO;
 				break;
 				default:
-
+				
 			}
 		}		
 		
 		/**
 		 * Cast the viewComponent to its actual type.
+		 * 
 		 * @return app the viewComponent cast to LoggedInBox
 		 */
 		protected function get loggedInBox(): LoggedInBox

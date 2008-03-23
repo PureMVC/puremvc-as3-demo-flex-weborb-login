@@ -5,8 +5,6 @@
  */
 package org.puremvc.as3.demos.flex.weborb.login.controller
 {	
-	import org.puremvc.as3.demos.flex.weborb.login.ApplicationFacade;
-	import org.puremvc.as3.demos.flex.weborb.login.model.ApplicationProxy;
 	import org.puremvc.as3.demos.flex.weborb.login.view.ApplicationMediator;
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -21,9 +19,7 @@ package org.puremvc.as3.demos.flex.weborb.login.controller
 		 */
 		override public function execute(note: INotification) :void	
 		{
-			facade.registerMediator( new ApplicationMediator(note.getBody()));
-			
-			sendNotification( ApplicationFacade.CHANGE_WORKFLOW_STATE,  ApplicationProxy.VIEWING_LOGIN_SCREEN);		
+			facade.registerMediator( new ApplicationMediator( note.getBody() as Login ));	
 		}		
 	}
 }

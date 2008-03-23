@@ -22,7 +22,7 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 	public class LoginPanelMediator extends Mediator implements IMediator
 	{
 
-		private var loginProxy: LoginProxy;
+		private var _loginProxy: LoginProxy;
 
 		public static const NAME:String = 'LoginPanelMediator';
 
@@ -30,13 +30,15 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		 * Constructor. 
 		 * @param object the viewComponent
 		 */				
-		public function LoginPanelMediator(viewComponent:Object) 
+		public function LoginPanelMediator(viewComponent: LoginPanel) 
 		{
 			super(NAME, viewComponent);
-			
-			loginProxy = LoginProxy(facade.retrieveProxy(LoginProxy.NAME));
-
-			loginPanel.addEventListener( LoginPanel.LOGIN, login);
+			//
+			// local reference to the LoginProxy
+			_loginProxy = facade.retrieveProxy( LoginProxy.NAME ) as LoginProxy;
+			//
+			// listen to events dispatched by its view component
+			loginPanel.addEventListener( LoginPanel.TRY_LOGIN, login );
 			
 		}
 
@@ -47,7 +49,10 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		 */
 		override public function listNotificationInterests():Array 
 		{
-			return [ ApplicationFacade.LOGIN_FAILED ];
+			return [ 
+						LoginProxy.LOGIN_FAILED,
+						LoginProxy.LOGIN_SUCCESS
+					 ];
 		}
 
 		/**
@@ -57,10 +62,13 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		 */
 		override public function handleNotification( note:INotification ):void 
 		{
-			switch (note.getName()) 
+			switch ( note.getName() ) 
 			{
-				case ApplicationFacade.LOGIN_FAILED:
-					loginFault(note.getBody());
+				case LoginProxy.LOGIN_FAILED:
+					loginPanel.statusMessage.htmlText = "<font color='#FF6600'>" + _loginProxy.faultMessage + "</font>";
+				break;
+				case LoginProxy.LOGIN_SUCCESS:
+					loginPanel.statusMessage.htmlText = "";
 				break;
 				default:
 
@@ -71,22 +79,13 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		/**
 		 * The user has initiated to log in.
 		 */
-		private function login (event:Event=null):void
+		private function login (event: Event=null ): void
 		{			
 			var loginVO: LoginVO = new LoginVO();
 			loginVO.username = loginPanel.username.text;
 			loginVO.password = loginPanel.password.text;
 
-			sendNotification(ApplicationFacade.LOGIN, loginVO);
-		}
-
-		/**
-		 * Shows an error message on login panel
-		 * @param message
-		 */		
-		private function loginFault (message: Object):void
-		{
-			loginPanel.statusMessage.htmlText = "<font color='#FF6600'>" + loginProxy.faultMessage + "</font>";
+			sendNotification( ApplicationFacade.LOGIN, loginVO );
 		}
 
 		/**

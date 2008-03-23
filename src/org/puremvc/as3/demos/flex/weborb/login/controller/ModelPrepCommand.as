@@ -19,8 +19,8 @@ package org.puremvc.as3.demos.flex.weborb.login.controller
 		 */
 		override public function execute( note:INotification ) :void	
 		{			
-			facade.registerProxy(new LoginProxy());	
-			facade.registerProxy(new ApplicationProxy());	
+			facade.registerProxy( new ApplicationProxy() );	
+			facade.registerProxy( new LoginProxy() );	
 		}
 	}
 }

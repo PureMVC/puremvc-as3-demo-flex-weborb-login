@@ -8,7 +8,6 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 	
 	import mx.core.Container;
 	
-	import org.puremvc.as3.demos.flex.weborb.login.ApplicationFacade;
 	import org.puremvc.as3.demos.flex.weborb.login.model.ApplicationProxy;
 	import org.puremvc.as3.demos.flex.weborb.login.model.LoginProxy;
 	import org.puremvc.as3.interfaces.IMediator;
@@ -22,23 +21,29 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 	{
 		public static const NAME:String = 'ApplicationMediator';
 
-		private var appProxy: ApplicationProxy;
-		private var loginProxy: LoginProxy;
+		private var _appProxy: ApplicationProxy;
+		private var _loginProxy: LoginProxy;
 					
 		/**
 		 * Constructor. 
 		 * 
-		 * @param object the viewComponent (the CodePeek instance in this case)
+		 * @param object the viewComponent
 		 */
-		public function ApplicationMediator( viewComponent:Object ) 
+		public function ApplicationMediator( viewComponent: Login ) 
 		{
 			super(NAME, viewComponent);
-				
+			
+			//
+			// register the needed mediators for its child components
 			facade.registerMediator(new LoginPanelMediator(app.login));
 			facade.registerMediator(new LoggedInBoxMediator(app.loggedIn));
-			
-			appProxy = ApplicationProxy(facade.retrieveProxy(ApplicationProxy.NAME));
-			loginProxy = LoginProxy(facade.retrieveProxy(LoginProxy.NAME));
+			//
+			// local reference to the proxies
+			_appProxy = facade.retrieveProxy(ApplicationProxy.NAME) as ApplicationProxy;
+			_loginProxy = facade.retrieveProxy(LoginProxy.NAME) as LoginProxy;		
+			//
+			// initialize the view state			
+			_appProxy.viewState = ApplicationProxy.LOGIN_STATE;	
 		}
 
 		/**
@@ -50,9 +55,7 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		{
 			
 			return [ 	
-						ApplicationFacade.LOGIN_FAILED,
-						ApplicationFacade.LOGIN_SUCCESS, 
-						ApplicationFacade.APP_STATE
+						ApplicationProxy.VIEW_STATE_CHANGED
 					];
 		}
 
@@ -65,13 +68,7 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		{
 			switch (note.getName()) 
 			{
-				case ApplicationFacade.LOGIN_FAILED:
-					sendNotification( ApplicationFacade.CHANGE_WORKFLOW_STATE,  ApplicationProxy.VIEWING_ERROR_SCREEN);
-				break;
-				case ApplicationFacade.LOGIN_SUCCESS:
-					sendNotification( ApplicationFacade.CHANGE_WORKFLOW_STATE,  ApplicationProxy.VIEWING_LOGGED_IN_SCREEN);
-				break;
-				case ApplicationFacade.APP_STATE:
+				case ApplicationProxy.VIEW_STATE_CHANGED:
 					changeViewState();
 				break;
 				default:
@@ -86,16 +83,16 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 		{
 			var child: Container;
 			
-			switch (appProxy.workflowState) 
+			switch (_appProxy.viewState) 
 			{
-				case ApplicationProxy.VIEWING_LOGIN_SCREEN:
+				case ApplicationProxy.LOGIN_STATE:
 					child = app.login;
 				break;
-				case ApplicationProxy.VIEWING_ERROR_SCREEN:
+				case ApplicationProxy.LOGIN_ERROR_STATE:
 					showError();
 					child = app.login;
 				break;
-				case ApplicationProxy.VIEWING_LOGGED_IN_SCREEN:
+				case ApplicationProxy.LOGGED_IN_STATE:
 					child = app.loggedIn;
 				break;
 				default:
@@ -112,9 +109,10 @@ package org.puremvc.as3.demos.flex.weborb.login.view
 	   private function showError():void
 	   {
 	   		app.faultEffect.end();
-	   		app.faultEffect.play();
-	   		
-	   		sendNotification( ApplicationFacade.CHANGE_WORKFLOW_STATE,  ApplicationProxy.VIEWING_LOGIN_SCREEN);
+	   		app.faultEffect.play();	   		
+	   		//
+			// set the view state back to the login state
+			_appProxy.viewState = ApplicationProxy.LOGIN_STATE;
 
 	   }
 		

@@ -18,7 +18,7 @@
 
     	import org.puremvc.as3.demos.flex.weborb.login.model.vo.LoginVO; 
 
-		public static const LOGIN: String = "login";
+		public static const TRY_LOGIN: String = "tryLogin";
 		
 		/*
 		*	Note: To avoid issues using this component as a view stack 
@@ -48,7 +48,7 @@
 		  	loginVO.username = username.text;
 		  	loginVO.password = password.text;
   			
-  			this.dispatchEvent(new Event(LOGIN));		
+  			this.dispatchEvent(new Event(TRY_LOGIN));		
 		}		
 		          
     ]]>

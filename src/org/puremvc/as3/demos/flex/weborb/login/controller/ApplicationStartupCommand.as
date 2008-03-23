@@ -11,7 +11,8 @@ package org.puremvc.as3.demos.flex.weborb.login.controller
 	public class ApplicationStartupCommand extends MacroCommand
 	{		
 		/**
-		 * Register the Proxies Commands.
+		 * Adds subcommands to execute in a special order
+		 * 
 		 */
 		override protected function initializeMacroCommand() :void
 		{
