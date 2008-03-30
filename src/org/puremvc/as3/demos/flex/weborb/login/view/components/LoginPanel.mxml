@@ -44,11 +44,7 @@
 		
 		private function loginUser(event: MouseEvent = null) : void
 		{
-		  	var loginVO : LoginVO = new LoginVO();
-		  	loginVO.username = username.text;
-		  	loginVO.password = password.text;
-  			
-  			this.dispatchEvent(new Event(TRY_LOGIN));		
+		  	this.dispatchEvent(new Event(TRY_LOGIN));		
 		}		
 		          
     ]]>

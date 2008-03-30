@@ -10,6 +10,8 @@ Release Date: 03/23/08
      License: Creative Commons Attribution 3.0 United States License
 --------------------------------------------------------------------------
 
+1.5.1 - Removed unused instance of LoginVO within LoginPanel
+
 1.5 - Refactored using Commands and Notifications as simple as possible 
 	- WorkFlowStateCommandes removed. There is no need anymore.
 	- Updated using PureMVC v. 2.0.3 without any modification of its code
